@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATEBAYO | Streaming Premium Moderno</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --slate-400: #94a3b8;
+            --slate-300: #cbd5e1;
+            --glass: rgba(15, 23, 42, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--darker);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Hubble_ultra_deep_field.jpg/1200px-Hubble_ultra_deep_field.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--darker), transparent),
+                        radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 0.15) 0px, transparent 50%),
+                        radial-gradient(at 0% 50%, hsla(355, 100%, 93%, 0.15) 0px, transparent 50%);
+            z-index: -1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--darker); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
+        
+        /* Main Layout & Typography */
+        header, section, footer {
+            padding: 3rem 1.5rem;
+        }
+
+        section {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
+            color: #fff;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
+            border-radius: 3px;
+        }
+        
+        /* Glassmorphism Elements */
+        .glass-element {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        header {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--slate-300);
+            font-weight: 300;
+        }
+
+        .logo-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.8rem;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+            transition: var(--transition-smooth);
+            border: 1px solid var(--glass-border);
+        }
+        
+        .logo-link:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5);
+        }
+
+        .logo-link img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: drop-shadow(0 0 10px rgba(165, 180, 252, 0.5));
+            display: block;
+        }
+
+        /* Search Input */
+        .buscador {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .buscador input {
+            padding: 0.8rem 1.5rem;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            outline: none;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition-smooth);
+        }
+        
+        .buscador input:focus {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.4);
+            border-color: var(--primary);
+        }
+        
+        .buscador input::placeholder { color: rgba(255, 255, 255, 0.6); }
+
+        /* Services Grid */
+        .servicios {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        /* Card Styling */
+        .card {
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition-smooth);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* Modernized Hover Effect */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: var(--y, 0);
+            left: var(--x, 0);
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease, top 0.2s linear, left 0.2s linear;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+
+        .card:hover::before { opacity: 1; }
+        
+        .card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .card img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px rgba(165, 180, 252, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover img { transform: scale(1.1) rotate(5deg); }
+        
+        .card p {
+            color: var(--slate-300);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            min-height: 43px; /* Ensures consistent card height */
+        }
+        
+        .card .precio {
+            display: inline-block;
+            background: rgba(79, 70, 229, 0.2);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            color: #a5b4fc;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+        
+        .boton {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .boton:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.4);
+        }
+        
+        .boton:focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active { display: flex; opacity: 1; }
+        
+        .modal-content {
+            padding: 2rem;
+            border-radius: 16px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .modal.active .modal-content { transform: scale(1); opacity: 1; }
+        
+        .close {
+            color: var(--slate-400);
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            line-height: 1;
+        }
+
+        .close:hover { color: #fff; }
+
+        #modal-price {
+            font-weight: bold;
+            margin: 1.5rem 0;
+            color: #a5b4fc;
+            font-size: 1.2rem;
+        }
+        
+        /* Payment Methods */
+        .metodos-pago ul {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+        
+        .metodo-pago {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .metodo-pago:hover { transform: translateY(-5px); }
+        
+        .metodo-pago img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)) grayscale(30%);
+            transition: filter 0.3s ease;
+        }
+
+        .metodo-pago:hover img { filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4)) grayscale(0%); }
+
+        .metodo-pago p {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--slate-400);
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            z-index: 100;
+            transition: var(--transition-smooth);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+        }
+        
+        .whatsapp-float:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            color: var(--slate-400);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* Animations & Responsive */
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+        .card:nth-child(7) { animation-delay: 0.7s; }
+        .card:nth-child(8) { animation-delay: 0.8s; }
+        /* Add more delays if needed */
+
+        @media (max-width: 480px) {
+            .servicios { grid-template-columns: 1fr; }
+            header, section, footer { padding: 2rem 1rem; }
+            .whatsapp-float { width: 50px; height: 50px; bottom: 1.5rem; right: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="glass-element">
+        <h1>DATEBAYO STREAMING</h1>
+        <p>Cuentas premium al mejor precio</p>
+        <a href="https://wa.link/tkuw6n" target="_blank" class="logo-link">
+            <img src="https://www.dropbox.com/scl/fi/i4q437e9gn5iiqlz18py9/file-4Uyv6HoNNf9Bv5NLwt3AYg.webp?rlkey=qccnchealpu8sy08ga9s8abt6&st=p26lkwj5&raw=1" alt="DATEBAYO Logo">
+        </a>
+    </header>
+
+    <main>
+        <section>
+            <h2>Servicios Disponibles</h2>
+            <div class="buscador">
+                <input type="text" id="busqueda" placeholder="Buscar servicio...">
+            </div>
+            <div class="servicios" id="lista-servicios">
+                <div class="card glass-element">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix">
+                    <h3>Netflix Perfil</h3>
+                    <p>Accede a series y películas  en la mejor calidad, sin interrupciones y con una buena experiencia .</p>
+                    <span class="precio">S/7.00</span>
+                    <button class="boton" data-servicio="Netflix Perfil" data-descripcion="Acceso premium a Netflix por 30 días." data-precio="S/7.00" data-whatsapp="https://wa.link/rt6ec1">Comprar</button> 
+                </div> 
+                <div class="card glass-element">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney+">
+                    <h3>Disney+ Perfil</h3>
+                    <p>Sumérgete en el universo de Disney, Marvel, Star Wars y más, con contenido exclusivo para toda la familia.</p>
+                    <span class="precio">S/7.00</span>
+                    <button class="boton" data-servicio="Disney+ Perfil" data-descripcion="Acceso completo a Disney+ por 30 días." data-precio="S/7.00" data-whatsapp="https://wa.link/ww5p9p">Comprar</button>
+                </div>
+                <div class="card glass-element">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify">
+                    <h3>Spotify Premium</h3>
+                    <p>Disfruta de tu música favorita sin límites ni anuncios, crea tus listas y descubre nuevos artistas con la mejor calidad de audio.</p>
+                    <span class="precio">S/9.00</span>
+                    <button class="boton" data-servicio="Spotify Premium" data-descripcion="Cuenta individual de Spotify Premium." data-precio="S/9.00" data-whatsapp="https://wa.link/yr162h">Comprar</button>
+                </div>
+                <div class="card glass-element">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png" alt="Prime Video">
+                    <h3>Prime Video</h3>
+                    <p>Accede a un vasto catálogo de series aclamadas y éxitos de taquilla, con la conveniencia y calidad que esperas de Amazon.</p>
+                    <span class="precio">S/7.50</span>
+                    <button class="boton" data-servicio="Prime Video" data-descripcion="Acceso completo a Prime Video." data-precio="S/7.50" data-whatsapp="https://wa.link/lmvpdf">Comprar</button>
+                </div>
+                <div class="card glass-element">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/HBO_Max_Logo.svg" alt="HBO Max">
+                    <h3>HBO Max</h3>
+                    <p>Vive la emoción de las series más épicas y el cine más impactante de HBO y Warner Bros. en una sola plataforma.</p>
+                    <span class="precio">S/7.00</span>
+                    <button class="boton" data-servicio="HBO Max" data-descripcion="Acceso completo a HBO Max." data-precio="S/7.00" data-whatsapp="https://wa.link/0lqdqy">Comprar</button>
+                </div>
+                <div class="card glass-element">
+                    <img src="https://www.servicioscorporativosperu.com/assets/img/productos/20240816022640.png" alt="Canva Pro">
+                    <h3>Canva Pro</h3>
+                    <p>Potencia tu creatividad con herramientas de diseño premium, plantillas ilimitadas y recursos visuales para cualquier proyecto.</p>
+                    <span class="precio">S/5.50</span>
+                    <button class="boton" data-servicio="Canva Pro" data-descripcion="Cuenta Canva Pro con todos los beneficios." data-precio="S/5.50" data-whatsapp="https://wa.link/dnv0tg">Comprar</button>
+                </div>
+                <div class="card glass-element">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5eywBG-I0jaLdGS1VDIY0ZQVd9kKXk9KJlQ&s" alt="Crunchyroll">
+                    <h3>Crunchyroll Premium</h3>
+                    <p>Disfruta de los estrenos de anime más recientes, sin anuncios y en alta definición, directamente desde Japón.</p>
+                    <span class="precio">S/6.50</span>
+                    <button class="boton" data-servicio="Crunchyroll" data-descripcion="Acceso premium a todo el catálogo de Crunchyroll." data-precio="S/6.50" data-whatsapp="https://wa.link/u8elwd">Comprar</button>
+                </div>
+                <div class="card glass-element">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2lJfSqUy9BWlzeJo6y0B6pkKQ3NG24C1deg&s" alt="Free Fire">
+                    <h3>Pase Booyah</h3>
+                    <p>Desbloquea recompensas exclusivas, apariencias únicas y beneficios adicionales para destacar en cada partida de Free Fire.</p>
+                    <span class="precio">S/6.50</span>
+                    <button class="boton" data-servicio="Pase Booyah Free Fire" data-descripcion="Pase Booyah con recompensas premium." data-precio="S/6.50" data-whatsapp="https://wa.link/kb7on0">Comprar</button>
+                </div>
+                <div class="card glass-element">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaLln9aj5MjsVx-h9PXS2z7TB0t_4Ie97SfQ&s" alt="Diamantes Free Fire">
+                    <h3>Diamantes FF</h3>
+                    <p>Recarga tus diamantes de forma rápida y segura para acceder a objetos, pases y eventos especiales del juego.</p>
+                    <span class="precio">Consultar</span>
+                    <button class="boton" data-servicio="Diamantes Free Fire" data-descripcion="Recarga de diamantes segura y rápida." data-precio="Consultar precio" data-whatsapp="https://wa.link/vgjxmz">Comprar</button>
+                </div>  
+                <div class="card glass-element">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHPajj8ZIW45SsYxM2IFuvCSjJtx5wfLH44g&s" alt="YouTube Premium">
+                    <h3>YouTube Premium</h3>
+                    <p>Disfruta de tus videos favoritos sin anuncios, reproduce en segundo plano y descarga contenido para verlo offline.</p>
+                    <span class="precio">S/7.00</span>
+                    <button class="boton" data-servicio="YouTube Premium" data-descripcion="YouTube Premium familiar." data-precio="S/7.00" data-whatsapp="https://wa.link/gmsa9v">Comprar</button>
+                </div>
+                <div class="card glass-element">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEsVJy2rH5kvID9w1SnZ8nxxLf0yjS9HvmFw&s" alt="Paramount+">
+                    <h3>Paramount+</h3>
+                    <p>Explora un mundo de entretenimiento con películas taquilleras, series originales y programas exclusivos de CBS, MTV y Showtime.</p>
+                    <span class="precio">S/6.00</span>
+                    <button class="boton" data-servicio="Paramount+" data-descripcion="Acceso completo a Paramount+." data-precio="S/6.00" data-whatsapp="https://wa.link/d4v40t">Comprar</button>
+                </div>
+                <div class="card glass-element">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvwk4hP3qmr6cmQfMAjvYPDSq3zwc7gusqHA&s" alt="Doxeo">
+                    <h3>Servicio Doxeo</h3>
+                    <p>Obtén información completa y detallada sobre cualquier persona, de manera segura, rápida y con la máxima discreción.</p>
+                    <span class="precio">S/5.00</span>
+                    <button class="boton" data-servicio="Servicio Doxeo" data-descripcion="Obtención de información completa y detallada c4, dni virtual,etc." data-precio="S/5.00" data-whatsapp="https://wa.link/30ezk2">Comprar</button>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Métodos de Pago</h2>
+            <div class="metodos-pago">
+                <ul>
+                    <li class="metodo-pago">
+                        <img src="https://logosenvector.com/logo/img/yape-bcp-4390.jpg" alt="Yape">
+                        <p>Yape</p>
+                    </li>
+                    <li class="metodo-pago">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiyS5e83xK1D7wvuNpvwBvT_yMTnSuRcTxHg&s" alt="Plin">
+                        <p>Plin</p>
+                    </li>
+                    <li class="metodo-pago">
+                        <img src="https://cdn-icons-png.flaticon.com/512/8043/8043680.png" alt="Transferencia">
+                        <p>Transferencia</p>
+                    </li>
+                    <li class="metodo-pago">
+                        <img src="https://seeklogo.com/images/B/bcp-logo-CCCCDA45A9-seeklogo.com.png" alt="BCP">
+                        <p>BCP</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <div id="modal" class="modal">
+        <div class="modal-content glass-element">
+            <span class="close">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p id="modal-desc"></p>
+            <p id="modal-price"></p>
+            <a id="confirmar-compra" class="boton" target="_blank">Confirmar compra</a>
+        </div>
+    </div>
+
+    <a href="https://wa.link/0fl5ab" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zM6.597 20.193c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 4.315 1.731 6.086l.001.004 4.971 4.971z"/></svg>
+    </a>
+
+    <footer class="glass-element">
+        <p>&copy; 2025 DATEBAYO STREAMING - Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDesc = document.getElementById('modal-desc');
+            const modalPrice = document.getElementById('modal-price');
+            const confirmButton = document.getElementById('confirmar-compra');
+            const closeModalButton = modal.querySelector('.close');
+            const searchInput = document.getElementById('busqueda');
+            const cards = document.querySelectorAll('.card');
+
+            // --- Modal Logic ---
+            const openModal = (button) => {
+                const service = button.dataset.servicio;
+                const description = button.dataset.descripcion;
+                const price = button.dataset.precio;
+                const whatsappLink = button.dataset.whatsapp;
+
+                modalTitle.textContent = service;
+                modalDesc.textContent = description;
+                modalPrice.textContent = price;
+                confirmButton.href = whatsappLink;
+                
+                modal.classList.add('active');
+            };
+
+            const closeModal = () => {
+                modal.classList.remove('active');
+            };
+
+            document.querySelectorAll('.boton[data-servicio]').forEach(button => {
+                button.addEventListener('click', () => openModal(button));
+            });
+
+            closeModalButton.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            // --- Search Filter Logic ---
+            const filterServices = () => {
+                const query = searchInput.value.toLowerCase();
+                cards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const description = card.querySelector('p').textContent.toLowerCase();
+                    const isVisible = title.includes(query) || description.includes(query);
+                    card.style.display = isVisible ? 'block' : 'none';
+                });
+            };
+
+            searchInput.addEventListener('keyup', filterServices);
+
+            // --- Card Hover Effect ---
+            cards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--x', `${x}px`);
+                    card.style.setProperty('--y', `${y}px`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
