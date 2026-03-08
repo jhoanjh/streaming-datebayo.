@@ -11,278 +11,389 @@
 
     <style>
         /* ================================================================= */
-        /* === 1. VARIABLES Y CONFIGURACIÓN DE FONDO === */
+        /* === 1. VARIABLES Y PALETA (Retro-Cyber Midnight) === */
         /* ================================================================= */
         :root {
-            --accent-gold: #ffcc33; 
-            --accent-violet: #9b6dff;
-            --text-light: #ffffff;
-            --text-dim: #e0e0e0;
-            --glass-bg: rgba(15, 12, 41, 0.75); /* Fondo de tarjetas */
-            --glass-border: rgba(255, 255, 255, 0.2);
+            --midnight: #0f0c29;
+            --deep-purple: #302b63;
+            --night-blue: #24243e;
+            --accent-gold: #ffcc33; /* Color de estrellas/energía */
+            --accent-violet: #9b6dff; /* Brillo principal */
+            --text-light: #f8f9fa;
+            --text-dim: #a0a0c0;
+            
+            --glass: rgba(15, 12, 41, 0.85); /* Un poco más opaco para legibilidad */
+            --glass-border: rgba(155, 109, 255, 0.3);
+            
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Scanlines Effect (Efecto de TV antigua/Monitor Retro) */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 9999;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+            opacity: 0.4;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #000;
-            /* IMAGEN DE FONDO SIN CAPAS AZULES PESADAS */
-            background-image: url('https://www.dropbox.com/scl/fi/ruh39s6jbqljxgpszojvq/9cbfae23-8a9c-46b3-a95f-eb7fbe77cfb8.jpg?rlkey=kgc1qgpn6e9y4gwh2a1u4iar3&st=hod5dbr3&raw=1');
+            background-color: var(--midnight);
+            /* ----------------------------------------------------------- */
+            /* --- NUEVA IMAGEN DE FONDO APLICADA --- */
+            /* Se añade un degradado oscuro encima para garantizar que el texto se lea bien */
+            background-image: 
+                linear-gradient(to bottom, rgba(15, 12, 41, 0.8), rgba(36, 36, 62, 0.9)),
+                url('https://www.dropbox.com/scl/fi/ruh39s6jbqljxgpszojvq/9cbfae23-8a9c-46b3-a95f-eb7fbe77cfb8.jpg?rlkey=kgc1qgpn6e9y4gwh2a1u4iar3&st=hod5dbr3&raw=1');
+            /* ----------------------------------------------------------- */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            background-repeat: no-repeat;
             color: var(--text-light);
             overflow-x: hidden;
         }
 
-        /* Efecto sutil de Scanlines (opcional, muy tenue para no tapar la imagen) */
-        body::before {
-            content: " ";
-            display: block;
-            position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
-            z-index: 9999;
-            background-size: 100% 4px;
-            pointer-events: none;
-            opacity: 0.2;
-        }
-
         /* ================================================================= */
-        /* === 2. HEADER (Cristalizado) === */
+        /* === 2. HEADER Y LOGO === */
         /* ================================================================= */
         header {
-            padding: 3rem 1rem;
+            padding: 4rem 1rem;
             text-align: center;
-            background: rgba(0, 0, 0, 0.4); /* Sombra suave para separar del fondo */
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--glass-border);
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--glass-border);
             margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 10;
         }
 
         h1 {
             font-family: 'Press Start 2P', cursive;
-            font-size: clamp(1.5rem, 6vw, 3rem);
-            color: #fff;
-            text-shadow: 4px 4px 0px var(--accent-violet);
+            font-size: clamp(1.5rem, 5vw, 3.5rem);
+            color: var(--text-light);
+            text-shadow: 3px 3px 0px var(--accent-violet), 6px 6px 0px rgba(0,0,0,0.5);
             margin-bottom: 1rem;
+            letter-spacing: -2px;
         }
 
         .logo-link img {
-            width: 110px;
-            height: 110px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            border: 3px solid var(--accent-gold);
-            box-shadow: 0 0 20px rgba(255, 204, 51, 0.5);
+            border: 4px solid var(--accent-gold);
+            box-shadow: 0 0 20px var(--accent-gold);
             transition: var(--transition);
+            background: var(--midnight);
             object-fit: cover;
-            background: #000;
         }
 
         .logo-link:hover img {
-            transform: scale(1.1) rotate(5deg);
-            border-color: #fff;
+            transform: rotate(360deg) scale(1.1);
+            box-shadow: 0 0 40px var(--accent-violet);
+            border-color: var(--accent-violet);
         }
 
         /* ================================================================= */
-        /* === 3. BUSCADOR Y SECCIONES === */
+        /* === 3. BUSCADOR === */
         /* ================================================================= */
         .buscador {
-            margin: 2rem auto;
-            max-width: 500px;
+            margin: 2rem auto 4rem;
+            max-width: 600px;
             padding: 0 1rem;
+            position: relative;
+            z-index: 10;
         }
 
         .buscador input {
             width: 100%;
-            padding: 1rem 1.5rem;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid var(--accent-gold);
+            padding: 1.2rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--glass-border);
             border-radius: 50px;
-            color: #fff;
+            color: white;
+            font-size: 1.1rem;
             outline: none;
-            backdrop-filter: blur(10px);
-            font-size: 1rem;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .buscador input:focus {
+            border-color: var(--accent-gold);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(255, 204, 51, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* ================================================================= */
+        /* === 4. SERVICIOS (Cards) === */
+        /* ================================================================= */
+        section {
+            position: relative;
+            z-index: 10;
+            padding-bottom: 4rem;
         }
 
         h2 {
             font-family: 'Press Start 2P', cursive;
             text-align: center;
-            font-size: 1.2rem;
-            margin: 3rem 0;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin-bottom: 3rem;
             color: var(--accent-gold);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            text-shadow: 2px 2px 0 #000;
         }
 
-        /* ================================================================= */
-        /* === 4. TARJETAS (Cards) === */
-        /* ================================================================= */
         .servicios {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 0 1.5rem 5rem;
+            padding: 0 2rem;
         }
 
         .card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
+            background: var(--glass);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 2rem;
+            padding: 2.5rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
             transition: var(--transition);
+            cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
         }
+
+        /* Efecto de brillo radial siguiendo el mouse */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: var(--y, 50%);
+            left: var(--x, 50%);
+            width: 0; height: 0;
+            background: radial-gradient(circle, rgba(155, 109, 255, 0.25) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+            z-index: 0;
+        }
+
+        .card:hover::before { width: 500px; height: 500px; }
 
         .card:hover {
             transform: translateY(-10px);
             border-color: var(--accent-gold);
-            background: rgba(15, 12, 41, 0.9);
-            box-shadow: 0 12px 40px rgba(155, 109, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
         }
 
         .card img {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             object-fit: contain;
-            margin-bottom: 1.2rem;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+            margin-bottom: 1.5rem;
+            z-index: 1;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+            transition: transform 0.3s ease;
         }
 
-        .card h3 { font-size: 1.3rem; margin-bottom: 0.8rem; color: #fff; }
+        .card:hover img { transform: scale(1.1); }
+
+        .card h3 { 
+            font-size: 1.4rem; 
+            margin-bottom: 1rem; 
+            z-index: 1; 
+            color: var(--text-light);
+            font-weight: 600;
+        }
 
         .card p { 
-            font-size: 0.9rem; 
+            font-size: 0.95rem; 
             color: var(--text-dim); 
-            margin-bottom: 1.2rem; 
-            line-height: 1.5;
-            min-height: 50px;
+            line-height: 1.6; 
+            margin-bottom: 1.5rem; 
+            z-index: 1;
+            flex-grow: 1; /* Empuja el precio hacia abajo */
         }
 
         .precio {
-            font-size: 1.6rem;
             font-weight: 800;
             color: var(--accent-gold);
-            margin-bottom: 1.2rem;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            z-index: 1;
+            font-family: 'Poppins', sans-serif;
         }
 
         .boton {
-            background: linear-gradient(135deg, var(--accent-violet), #4a148c);
-            color: #fff;
-            padding: 0.8rem 2rem;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: 0.3s;
+            background: linear-gradient(135deg, var(--accent-violet), var(--deep-purple));
+            color: white;
+            padding: 0.8rem 2.5rem;
             border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             cursor: pointer;
-            width: 100%;
+            transition: var(--transition);
+            z-index: 1;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .boton:hover {
-            box-shadow: 0 0 20px var(--accent-violet);
             filter: brightness(1.2);
+            box-shadow: 0 0 25px var(--accent-violet);
+            transform: scale(1.05);
         }
 
         /* ================================================================= */
-        /* === 5. MODAL Y EXTRAS === */
+        /* === 5. MODAL === */
         /* ================================================================= */
         .modal {
             display: none;
             position: fixed;
             inset: 0;
             z-index: 10000;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.9);
             backdrop-filter: blur(15px);
             justify-content: center;
             align-items: center;
             opacity: 0;
-            transition: 0.4s;
+            transition: opacity 0.4s ease;
+            padding: 1rem;
         }
 
         .modal.active { display: flex; opacity: 1; }
 
         .modal-content {
-            background: #1a1a2e;
+            background: var(--night-blue);
+            background-image: linear-gradient(var(--night-blue), var(--midnight));
             border: 2px solid var(--accent-gold);
-            padding: 2.5rem;
+            padding: 3rem;
             border-radius: 20px;
-            max-width: 450px;
-            width: 90%;
+            max-width: 500px;
+            width: 100%;
             text-align: center;
             position: relative;
+            transform: translateY(50px);
+            transition: var(--transition);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
         }
+
+        .modal.active .modal-content { transform: translateY(0); }
 
         .close {
             position: absolute;
-            top: 10px; right: 20px;
-            font-size: 2rem;
+            top: 1rem; right: 1.5rem;
+            font-size: 2.5rem;
             color: var(--accent-gold);
             cursor: pointer;
+            line-height: 1;
         }
+        
+        .close:hover { color: var(--text-light); }
+
+        #modal-title { font-family: 'Poppins', sans-serif; font-weight: 800; color: #fff; }
 
         #modal-price {
             display: block;
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--accent-gold);
-            margin: 1rem 0;
+            margin: 2rem 0;
             font-weight: 800;
+            text-shadow: 0 0 15px rgba(255, 204, 51, 0.5);
         }
 
+        /* ================================================================= */
+        /* === 6. PAGOS Y FOOTER === */
+        /* ================================================================= */
         .metodos-pago {
-            background: rgba(0,0,0,0.6);
-            padding: 3rem 1rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
+            background: var(--glass);
+            margin-top: 0;
+            padding: 4rem 1rem;
+            border-top: 2px solid var(--glass-border);
+            position: relative;
+            z-index: 10;
         }
 
         .metodos-pago ul {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            list-style: none;
+            gap: 3rem;
             flex-wrap: wrap;
-            margin-top: 1rem;
+            list-style: none;
+            max-width: 1000px;
+            margin: 0 auto;
         }
+
+        .metodo-pago { text-align: center; color: var(--text-dim); }
 
         .metodo-pago img {
-            width: 50px;
-            height: 50px;
-            filter: grayscale(1);
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            filter: grayscale(1) opacity(0.6);
             transition: 0.3s;
+            margin-bottom: 1rem;
         }
 
-        .metodo-pago:hover img { filter: grayscale(0); transform: scale(1.1); }
-
-        .whatsapp-float {
-            position: fixed;
-            bottom: 2rem; right: 2rem;
-            background: #25d366;
-            width: 60px; height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-            z-index: 999;
+        .metodo-pago:hover img {
+            filter: grayscale(0) opacity(1);
+            transform: scale(1.1);
         }
 
         footer {
             text-align: center;
-            padding: 2rem;
-            background: rgba(0,0,0,0.8);
-            font-size: 0.8rem;
-            color: #888;
+            padding: 3rem;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 10;
+            background: rgba(0,0,0,0.2);
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem; right: 2rem;
+            background: #25d366;
+            width: 65px; height: 65px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            z-index: 999;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover { 
+            transform: scale(1.1) rotate(15deg); 
+            background: #20ba5a;
+        }
+
+        /* ================================================================= */
+        /* === 7. RESPONSIVE === */
+        /* ================================================================= */
+        @media (max-width: 768px) {
+            .servicios { grid-template-columns: 1fr; padding: 0 1rem; }
+            header { padding: 3rem 1rem; }
+            h1 { font-size: 1.8rem; }
+            .card { padding: 2rem; }
+            .modal-content { padding: 2rem 1rem; }
+            #modal-price { font-size: 2.5rem; }
         }
     </style>
 </head>
@@ -290,76 +401,78 @@
 
     <header>
         <a href="https://wa.link/tkuw6n" target="_blank" class="logo-link">
-            <img src="https://www.dropbox.com/scl/fi/i4q437e9gn5iiqlz18py9/file-4Uyv6HoNNf9Bv5NLwt3AYg.webp?rlkey=qccnchealpu8sy08ga9s8abt6&st=p26lkwj5&raw=1" alt="Logo">
+            <img src="https://www.dropbox.com/scl/fi/i4q437e9gn5iiqlz18py9/file-4Uyv6HoNNf9Bv5NLwt3AYg.webp?rlkey=qccnchealpu8sy08ga9s8abt6&st=p26lkwj5&raw=1" alt="DATEBAYO Logo">
         </a>
         <h1>DATEBAYO</h1>
-        <p style="color: var(--accent-gold); letter-spacing: 2px;">STREAMING PREMIUM</p>
+        <p style="color: var(--accent-gold); font-weight: 600; letter-spacing: 2px; margin-top: 0.5rem;">STREAMING DE OTRA GALAXIA</p>
     </header>
 
     <main>
         <div class="buscador">
-            <input type="text" id="busqueda" placeholder="Buscar servicio...">
+            <input type="text" id="busqueda" placeholder="¿Qué mundo quieres explorar hoy? (Netflix, Crunchyroll...)">
         </div>
 
         <section>
-            <h2>CATÁLOGO GALÁCTICO</h2>
-            <div class="servicios">
+            <h2>MUNDOS DISPONIBLES</h2>
+            <div class="servicios" id="lista-servicios">
+                
                 <div class="card">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix">
                     <h3>Netflix Perfil</h3>
-                    <p>4K Ultra HD. Estrenos exclusivos y series originales.</p>
+                    <p>Accede al catálogo completo en Ultra HD. Series, películas y documentales sin límites.</p>
                     <span class="precio">S/.12.00</span>
-                    <button class="boton" data-servicio="Netflix" data-precio="S/.12.00" data-whatsapp="https://wa.link/rt6ec1">Comprar</button>
+                    <button class="boton" data-servicio="Netflix Perfil" data-descripcion="Acceso premium Ultra HD a Netflix por 30 días (Perfil Privado)." data-precio="S/.12.00" data-whatsapp="https://wa.link/rt6ec1">Obtener</button> 
                 </div>
 
                 <div class="card">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify">
                     <h3>Spotify Premium</h3>
-                    <p>Música sin anuncios y modo offline.</p>
+                    <p>Música sin anuncios, descargas para escuchar offline y la mejor calidad de sonido.</p>
                     <span class="precio">S/.9.00</span>
-                    <button class="boton" data-servicio="Spotify" data-precio="S/.9.00" data-whatsapp="https://wa.link/yr162h">Comprar</button>
+                    <button class="boton" data-servicio="Spotify Premium" data-descripcion="Cuenta individual Spotify Premium por 30 días garantizados." data-precio="S/.9.00" data-whatsapp="https://wa.link/yr162h">Obtener</button>
                 </div>
 
                 <div class="card">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney">
-                    <h3>Disney+</h3>
-                    <p>Marvel, Star Wars y los mejores clásicos.</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney+">
+                    <h3>Disney+ Perfil</h3>
+                    <p>Todo Disney, Pixar, Marvel, Star Wars y National Geographic en un solo lugar.</p>
                     <span class="precio">S/.7.00</span>
-                    <button class="boton" data-servicio="Disney+" data-precio="S/.7.00" data-whatsapp="https://wa.link/ww5p9p">Comprar</button>
+                    <button class="boton" data-servicio="Disney+ Perfil" data-descripcion="Acceso completo a Disney+ por 30 días (Perfil Privado)." data-precio="S/.7.00" data-whatsapp="https://wa.link/ww5p9p">Obtener</button>
+                </div>
+
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png" alt="Prime Video">
+                    <h3>Prime Video</h3>
+                    <p>Amazon Originals exclusivos, películas populares y programas de TV galardonados.</p>
+                    <span class="precio">S/.7.50</span>
+                    <button class="boton" data-servicio="Prime Video" data-descripcion="Acceso completo a Amazon Prime Video por 30 días." data-precio="S/.7.50" data-whatsapp="https://wa.link/lmvpdf">Obtener</button>
                 </div>
 
                 <div class="card">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5eywBG-I0jaLdGS1VDIY0ZQVd9kKXk9KJlQ&s" alt="Crunchyroll">
                     <h3>Crunchyroll</h3>
-                    <p>Todo el anime legal en alta definición.</p>
+                    <p>La colección más grande de anime del mundo. Disfruta de nuevos episodios poco después de su emisión en Japón.</p>
                     <span class="precio">S/.6.50</span>
-                    <button class="boton" data-servicio="Crunchyroll" data-precio="S/.6.50" data-whatsapp="https://wa.link/u8elwd">Comprar</button>
+                    <button class="boton" data-servicio="Crunchyroll" data-descripcion="Acceso Premium (Fan) a todo el catálogo de Crunchyroll sin anuncios por 30 días." data-precio="S/.6.50" data-whatsapp="https://wa.link/u8elwd">Obtener</button>
                 </div>
 
                 <div class="card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHPajj8ZIW45SsYxM2IFuvCSjJtx5wfLH44g&s" alt="YouTube">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHPajj8ZIW45SsYxM2IFuvCSjJtx5wfLH44g&s" alt="YouTube Premium">
                     <h3>YouTube Premium</h3>
-                    <p>Sin anuncios y YouTube Music incluido.</p>
+                    <p>YouTube y YouTube Music sin anuncios, en segundo plano y con descargas.</p>
                     <span class="precio">S/.7.00</span>
-                    <button class="boton" data-servicio="YouTube Premium" data-precio="S/.7.00" data-whatsapp="https://wa.link/gmsa9v">Comprar</button>
-                </div>
-
-                <div class="card">
-                    <img src="https://www.servicioscorporativosperu.com/assets/img/productos/20240816022640.png" alt="Canva">
-                    <h3>Canva Pro</h3>
-                    <p>Diseño profesional sin límites.</p>
-                    <span class="precio">S/.5.50</span>
-                    <button class="boton" data-servicio="Canva Pro" data-precio="S/.5.50" data-whatsapp="https://wa.link/dnv0tg">Comprar</button>
+                    <button class="boton" data-servicio="YouTube Premium" data-descripcion="Suscripción YouTube Premium (Plan Familiar/Invitación) por 30 días." data-precio="S/.7.00" data-whatsapp="https://wa.link/gmsa9v">Obtener</button>
                 </div>
             </div>
         </section>
 
         <section class="metodos-pago">
-            <h2>MÉTODOS DE PAGO</h2>
+            <h2>MÉTODOS DE TRANSFERENCIA GALÁCTICOS</h2>
             <ul>
-                <li class="metodo-pago"><img src="https://logosenvector.com/logo/img/yape-bcp-4390.jpg" alt="Yape"></li>
-                <li class="metodo-pago"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiyS5e83xK1D7wvuNpvwBvT_yMTnSuRcTxHg&s" alt="Plin"></li>
-                <li class="metodo-pago"><img src="https://seeklogo.com/images/B/bcp-logo-CCCCDA45A9-seeklogo.com.png" alt="BCP"></li>
+                <li class="metodo-pago"><img src="https://logosenvector.com/logo/img/yape-bcp-4390.jpg" alt="Yape"><p>Yape</p></li>
+                <li class="metodo-pago"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiyS5e83xK1D7wvuNpvwBvT_yMTnSuRcTxHg&s" alt="Plin"><p>Plin</p></li>
+                <li class="metodo-pago"><img src="https://seeklogo.com/images/B/bcp-logo-CCCCDA45A9-seeklogo.com.png" alt="BCP"><p>BCP</p></li>
+                <li class="metodo-pago"><img src="https://cdn-icons-png.flaticon.com/512/8043/8043680.png" alt="Transferencia"><p>Interbank/Otros</p></li>
             </ul>
         </section>
     </main>
@@ -368,45 +481,104 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2 id="modal-title"></h2>
+            <p id="modal-desc" style="color: var(--text-dim); margin-top: 0.5rem; font-style: italic;"></p>
             <span id="modal-price"></span>
-            <p style="margin-bottom: 2rem;">¡Tu pedido está casi listo! Dale al botón para concretar por WhatsApp.</p>
-            <a id="confirmar-compra" class="boton" target="_blank">IR A WHATSAPP</a>
+            <p style="color: var(--text-light); margin-bottom: 2rem;">Serás redirigido a WhatsApp para coordinar el pago y la entrega inmediata. ✨</p>
+            <a id="confirmar-compra" class="boton" target="_blank">CONFIRMAR PEDIDO VIA WHATSAPP</a>
         </div>
     </div>
 
-    <a href="https://wa.link/0fl5ab" class="whatsapp-float" target="_blank">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zM6.597 20.193c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 4.315 1.731 6.086l.001.004 4.971 4.971z"/></svg>
+    <a href="https://wa.link/0fl5ab" class="whatsapp-float" target="_blank" aria-label="Soporte técnico DATEBAYO">
+        <svg width="35" height="35" viewBox="0 0 24 24" fill="white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zM6.597 20.193c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 4.315 1.731 6.086l.001.004 4.971 4.971z"/></svg>
     </a>
 
     <footer>
-        <p>&copy; 2026 DATEBAYO STREAMING | Tu entretenimiento garantizado.</p>
+        <p>&copy; 2026 DATEBAYO STREAMING - OPERACIÓN MIDNIGHT | Todos los derechos reservados.</p>
+        <p style="font-size: 0.7rem; margin-top: 0.5rem;">Todas las marcas son propiedad de sus respectivos dueños.</p>
     </footer>
 
     <script>
-        const modal = document.getElementById('modal');
-        const searchInput = document.getElementById('busqueda');
-        const cards = document.querySelectorAll('.card');
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('modal');
+            const searchInput = document.getElementById('busqueda');
+            const cards = document.querySelectorAll('.card');
 
-        // Modal
-        document.querySelectorAll('.boton[data-servicio]').forEach(btn => {
-            btn.onclick = () => {
+            // --- Lógica del Modal (Abrir/Cerrar) ---
+            const openModal = (btn) => {
+                // Rellenar datos del modal desde los atributos 'data-' del botón
                 document.getElementById('modal-title').textContent = btn.dataset.servicio;
+                document.getElementById('modal-desc').textContent = btn.dataset.descripcion;
                 document.getElementById('modal-price').textContent = btn.dataset.precio;
                 document.getElementById('confirmar-compra').href = btn.dataset.whatsapp;
+                
                 modal.classList.add('active');
+            };
+
+            const closeModal = () => {
+                modal.classList.remove('active');
+            };
+
+            // Asignar eventos a los botones de "Obtener"
+            document.querySelectorAll('.boton[data-servicio]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Evita que el click interactúe con la card
+                    openModal(btn);
+                });
+            });
+
+            // Cerrar modal al hacer click en la 'X' o fuera del contenido
+            document.querySelector('.close').onclick = closeModal;
+            window.onclick = (e) => {
+                if (e.target == modal) {
+                    closeModal();
+                }
+            };
+            
+            // Cerrar con tecla Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+
+            // --- Buscador Dinámico ---
+            searchInput.addEventListener('input', () => {
+                const term = searchInput.value.toLowerCase().trim();
+                
+                cards.forEach(card => {
+                    // Busca en título y descripción
+                    const title = card.querySelector('h3').innerText.toLowerCase();
+                    const description = card.querySelector('p').innerText.toLowerCase();
+                    
+                    if (title.includes(term) || description.includes(term)) {
+                        card.style.display = "flex"; // Usamos flex porque está definido en el CSS
+                        // Pequeño delay para la animación de opacidad
+                        setTimeout(() => card.style.opacity = "1", 10);
+                    } else {
+                        card.style.opacity = "0";
+                        // Espera a que termine la transición de opacidad para ocultar
+                        setTimeout(() => card.style.display = "none", 300);
+                    }
+                });
+            });
+
+            // --- Efecto de brillo radial (mousemove) en las Cards ---
+            // Solo se activa en pantallas que no sean táctiles para rendimiento
+            if (window.matchMedia("(hover: hover)").matches) {
+                cards.forEach(card => {
+                    card.addEventListener('mousemove', e => {
+                        const rect = card.getBoundingClientRect();
+                        // Calcula posición del mouse relativa a la card
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        
+                        // Setea variables CSS
+                        card.style.setProperty('--x', `${x}px`);
+                        card.style.setProperty('--y', `${y}px`);
+                    });
+                });
             }
         });
-
-        document.querySelector('.close').onclick = () => modal.classList.remove('active');
-        window.onclick = (e) => { if(e.target == modal) modal.classList.remove('active'); };
-
-        // Buscador
-        searchInput.oninput = () => {
-            const val = searchInput.value.toLowerCase();
-            cards.forEach(c => {
-                c.style.display = c.innerText.toLowerCase().includes(val) ? "flex" : "none";
-            });
-        };
     </script>
 </body>
 </html>
