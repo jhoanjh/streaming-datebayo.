@@ -115,10 +115,13 @@
 
         .card img { width: 70px; height: 70px; margin-bottom: 1rem; }
 
-        .price-container { margin: 1.5rem 0; height: 60px; }
+        .stock-label { font-size: 0.7rem; color: #aaa; margin-bottom: 10px; }
+        .stock-num { color: var(--sakura-pink); font-weight: bold; }
+
+        .price-container { margin: 1rem 0; height: 60px; }
 
         .precio-antes {
-            display: none; /* Se activa con el cupón */
+            display: none; 
             text-decoration: line-through;
             color: #ff6b6b;
             font-size: 0.9rem;
@@ -140,6 +143,8 @@
             border: none; cursor: pointer; width: 100%;
             font-weight: 700; text-transform: uppercase;
             transition: 0.3s;
+            display: inline-block;
+            text-decoration: none;
         }
 
         .btn-regalo:hover { background: var(--deep-rose); color: #fff; box-shadow: 0 0 20px var(--deep-rose); }
@@ -179,95 +184,93 @@
     <main>
         <div class="grid-productos" id="lista-servicios">
             
-            <div class="card" data-normal="13.00" data-oferta="11.00">
+            <div class="card" data-normal="12.00" data-stock="10">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix">
                 <h3>Netflix Perfil</h3>
-                <div class="price-container">
-                    <span class="precio-antes">S/.13.00</span>
-                    <span class="precio-ahora">S/.13.00</span>
-                </div>
-                <button class="btn-regalo" data-servicio="Netflix" data-whatsapp="https://wa.link/i4ucvq">Regalar</button>
-            </div>
-
-            <div class="card" data-normal="12.00" data-oferta="9.50">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify">
-                <h3>Spotify Premium</h3>
+                <p class="stock-label">Stock: <span class="stock-num">5</span> disponibles</p>
                 <div class="price-container">
                     <span class="precio-antes">S/.12.00</span>
                     <span class="precio-ahora">S/.12.00</span>
                 </div>
+                <button class="btn-regalo" data-servicio="Netflix" data-whatsapp="https://wa.link/i4ucvq">Regalar</button>
+            </div>
+
+            <div class="card" data-normal="9.50" data-stock="15">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify">
+                <h3>Spotify Premium</h3>
+                <p class="stock-label">Stock: <span class="stock-num">2</span> disponibles</p>
+                <div class="price-container">
+                    <span class="precio-antes">S/.9.50</span>
+                    <span class="precio-ahora">S/.9.50</span>
+                </div>
                 <button class="btn-regalo" data-servicio="Spotify" data-whatsapp="https://wa.link/n0v1j9">Regalar</button>
             </div>
 
-            <div class="card" data-normal="9.00" data-oferta="7.00">
+            <div class="card" data-normal="7.50" data-stock="8">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/HBO_Max_Logo.svg" alt="Max">
                 <h3>Max Perfil</h3>
+                <p class="stock-label">Stock: <span class="stock-num">0</span> disponibles</p>
                 <div class="price-container">
-                    <span class="precio-antes">S/.10.00</span>
-                    <span class="precio-ahora">S/.10.00</span>
+                    <span class="precio-antes">S/.7.50</span>
+                    <span class="precio-ahora">S/.7.50</span>
                 </div>
                 <button class="btn-regalo" data-servicio="Max Perfil" data-whatsapp="https://wa.link/fl1i2g">Regalar</button>
             </div>
 
-            <div class="card" data-normal="9.00" data-oferta="7.00">
+            <div class="card" data-normal="7.50" data-stock="5">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney">
-                <h3>Disney+</h3>
+                <h3>Disney Perfil</h3>
+                <p class="stock-label">Stock: <span class="stock-num">5</span> disponibles</p>
                 <div class="price-container">
-                    <span class="precio-antes">S/.9.00</span>
-                    <span class="precio-ahora">S/.9.00</span>
+                    <span class="precio-antes">S/.7.50</span>
+                    <span class="precio-ahora">S/.7.50</span>
                 </div>
-                <button class="btn-regalo" data-servicio="Disney+" data-whatsapp="https://wa.link/x06gyz">Regalar</button>
+                <button class="btn-regalo" data-servicio="Disney+ Perfil" data-whatsapp="https://wa.link/x06gyz">Regalar</button>
             </div>
 
-            <div class="card" data-normal="10.00" data-oferta="7.50">
+            <div class="card" data-normal="8.00" data-stock="12">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png" alt="Prime">
                 <h3>Prime Video</h3>
+                <p class="stock-label">Stock: <span class="stock-num">4</span> disponibles</p>
                 <div class="price-container">
-                    <span class="precio-antes">S/.10.00</span>
-                    <span class="precio-ahora">S/.10.00</span>
+                    <span class="precio-antes">S/.8.00</span>
+                    <span class="precio-ahora">S/.8.00</span>
                 </div>
                 <button class="btn-regalo" data-servicio="Prime Video" data-whatsapp="https://wa.link/hywpc4">Regalar</button>
             </div>
 
-            <div class="card" data-normal="10.00" data-oferta="7.00">
+            <div class="card" data-normal="7.00" data-stock="20">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHPajj8ZIW45SsYxM2IFuvCSjJtx5wfLH44g&s" alt="YouTube">
-                <h3>YouTube Prem.</h3>
-                <div class="price-container">
-                    <span class="precio-antes">S/.10.00</span>
-                    <span class="precio-ahora">S/.10.00</span>
-                </div>
-                <button class="btn-regalo" data-servicio="YouTube Premium" data-whatsapp="https://wa.link/4eek8z">Regalar</button>
-            </div>
-
-            <div class="card" data-normal="7.00" data-oferta="5.00">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2lJfSqUy9BWlzeJo6y0B6pkKQ3NG24C1deg&s" alt="Booyah">
-                <h3>Pase Booyah</h3>
+                <h3>YouTube Indiv.</h3>
+                <p class="stock-label">Stock: <span class="stock-num">ilimitado</span> disponibles</p>
                 <div class="price-container">
                     <span class="precio-antes">S/.7.00</span>
                     <span class="precio-ahora">S/.7.00</span>
                 </div>
+                <button class="btn-regalo" data-servicio="YouTube Individual" data-whatsapp="https://wa.link/4eek8z">Regalar</button>
+            </div>
+
+            <div class="card" data-normal="5.50" data-stock="50">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2lJfSqUy9BWlzeJo6y0B6pkKQ3NG24C1deg&s" alt="Booyah">
+                <h3>Pase Booyah</h3>
+                <p class="stock-label">Stock: <span class="stock-num">25</span> disponibles</p>
+                <div class="price-container">
+                    <span class="precio-antes">S/.5.50</span>
+                    <span class="precio-ahora">S/.5.50</span>
+                </div>
                 <button class="btn-regalo" data-servicio="Pase Booyah" data-whatsapp="https://wa.link/ziwrho">Regalar</button>
             </div>
 
-            <div class="card" data-normal="8.00" data-oferta="5.00">
+            <div class="card" data-normal="5.00" data-stock="Ilimitado">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvwk4hP3qmr6cmQfMAjvYPDSq3zwc7gusqHA&s" alt="Doxeo">
                 <h3>Info Detallada</h3>
+                <p class="stock-label">Stock: <span class="stock-num">Ilimitado</span></p>
                 <div class="price-container">
-                    <span class="precio-antes">S/.10.00</span>
-                    <span class="precio-ahora">S/.10.00</span>
+                    <span class="precio-antes">S/.5.00</span>
+                    <span class="precio-ahora">S/.5.00</span>
                 </div>
-                <button class="btn-regalo" data-servicio="Doxeo" data-whatsapp="https://wa.link/z1irr3">Regalar</button>
+                <button class="btn-regalo" data-servicio="Información Detallada" data-whatsapp="https://wa.link/z1irr3">Regalar</button>
             </div>
-
-            <div class="card" data-normal="Consultar" data-oferta="Oferta">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaLln9aj5MjsVx-h9PXS2z7TB0t_4Ie97SfQ&s" alt="Diamantes">
-                <h3>Diamantes FF</h3>
-                <div class="price-container">
-                    <span class="precio-ahora">S/. Variable</span>
-                </div>
-                <button class="btn-regalo" data-servicio="Diamantes" data-whatsapp="https://wa.link/tipy4h">Consultar</button>
-            </div>
-
         </div>
     </main>
 
@@ -288,27 +291,39 @@
     </footer>
 
     <script>
+        // ==========================================
+        // CONFIGURACIÓN DE DESCUENTO (CÁMBIALO AQUÍ)
+        // ==========================================
+        const PORCENTAJE_DESCUENTO = 10; // Cambia este número para el % de rebaja
+        const CODIGO_VALIDO = 'DAVID2026';
+        // ==========================================
+
         const cards = document.querySelectorAll('.card');
         const couponInput = document.getElementById('coupon-input');
         const msg = document.getElementById('coupon-message');
-        let isDiscounted = false;
 
         function applyCoupon() {
             const code = couponInput.value.trim().toUpperCase();
             
-            if (code === 'MAMA2026') {
-                isDiscounted = true;
+            if (code === CODIGO_VALIDO) {
                 msg.style.color = "#4ade80";
-                msg.innerText = "¡CUPÓN APLICADO! - DESCUENTOS ACTIVADOS";
+                msg.innerText = `¡CUPÓN APLICADO! - DESCUENTO DEL ${PORCENTAJE_DESCUENTO}% ACTIVADO`;
                 
                 cards.forEach(card => {
-                    const normal = card.getAttribute('data-normal');
-                    const oferta = card.getAttribute('data-oferta');
+                    const precioNormal = parseFloat(card.getAttribute('data-normal'));
                     
-                    if (normal && oferta) {
-                        card.querySelector('.precio-antes').style.display = 'block';
+                    if (!isNaN(precioNormal)) {
+                        // Cálculo matemático del descuento
+                        const montoADescontar = precioNormal * (PORCENTAJE_DESCUENTO / 100);
+                        const precioFinal = (precioNormal - montoADescontar).toFixed(2);
+
+                        // Actualización visual en la tarjeta
+                        const pAntes = card.querySelector('.precio-antes');
+                        pAntes.innerText = "S/." + precioNormal.toFixed(2);
+                        pAntes.style.display = 'block';
+                        
                         const pAhora = card.querySelector('.precio-ahora');
-                        pAhora.innerText = "S/." + oferta;
+                        pAhora.innerText = "S/." + precioFinal;
                         pAhora.classList.add('discount');
                     }
                 });
@@ -319,9 +334,9 @@
             }
         }
 
-        // Modal Logic
+        // Lógica del Modal
         document.querySelectorAll('.btn-regalo').forEach(btn => {
-            btn.onclick = () => {
+            btn.addEventListener('click', function() {
                 const card = btn.closest('.card');
                 const price = card.querySelector('.precio-ahora').innerText;
                 
@@ -329,7 +344,7 @@
                 document.getElementById('modal-price').innerText = price;
                 document.getElementById('confirmar-compra').href = btn.dataset.whatsapp;
                 document.getElementById('modal').style.display = 'flex';
-            };
+            });
         });
 
         window.onclick = (e) => { 
